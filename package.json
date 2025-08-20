@@ -3,13 +3,14 @@
 	"version": "1.0.0",
 	"description": "Functional TypeScript router for Cloudflare Workers",
 	"type": "module",
-	"main": "./dist/index.js",
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.mjs"
+				"import": "./dist/index.mjs",
+				"types": "./dist/index.d.ts"
 			}
 		}
 	},
@@ -18,8 +19,10 @@
 	],
 	"scripts": {
 		"build": "tsup",
+		"dev": "wrangler dev --config wrangler.jsonc",
 		"test": "vitest",
-		"test:coverage": "vitest --coverage"
+		"test:coverage": "vitest --coverage",
+		"types": "wrangler types --config wrangler.jsonc"
 	},
 	"keywords": [],
 	"author": {
