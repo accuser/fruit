@@ -1,6 +1,11 @@
 import { getRequestEvent } from '$lib/router/als';
 import type { RequestPredicate } from '$types';
 
+const isComponentResult = (input: unknown): input is URLPatternComponentResult =>
+	typeof input === 'object' &&
+	typeof (input as URLPatternComponentResult).input === 'string' &&
+	typeof (input as URLPatternComponentResult).groups === 'object';
+
 export const url = <const T extends string | URLPatternInit>(input: T): RequestPredicate => {
 	const pattern = new URLPattern(input);
 
@@ -11,14 +16,27 @@ export const url = <const T extends string | URLPatternInit>(input: T): RequestP
 			return false;
 		}
 
-		const event = getRequestEvent();
+		const params = Object.values(result)
+			.filter(isComponentResult)
+			.reduce(
+				(acc, { groups }) => {
+					Object.entries(groups).forEach(([key, value]) => {
+						if (
+							isNaN(Number(key)) === false ||
+							typeof key !== 'string' ||
+							key.startsWith('__') ||
+							['constructor', 'prototype'].includes(key)
+						) {
+							return;
+						}
+						acc[key] = value.slice(0, 1000);
+					});
+					return acc;
+				},
+				{} as Record<string, string>
+			);
 
-		Object.assign(
-			event.params,
-			Object.values(result)
-				.filter((component) => component?.groups)
-				.map((component) => Object.fromEntries(Object.entries(component.groups).filter(([key]) => isNaN(Number(key)))))
-		);
+		Object.assign(getRequestEvent(), { params });
 
 		return true;
 	};
