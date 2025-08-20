@@ -11,8 +11,8 @@ export const router = () => {
 			(typeof prop === 'string'
 				? <const T extends string | URLPatternInit>(input: T, handler: RequestHandler<T>): Router => {
 						routes.push(match(prop.toUpperCase() as Method, input, handler));
-						return receiver;
+						return receiver as typeof target & Router;
 					}
 				: undefined),
-	});
+	}) as unknown as ReturnType<typeof route> & Router;
 };
