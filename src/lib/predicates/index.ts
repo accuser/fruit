@@ -1,5 +1,6 @@
+export * from '../combinators/and';
+export * from '../combinators/or';
 export * from './accept';
-export * from './and';
 export * from './content-type';
 export * from './custom';
 export * from './header';
@@ -7,7 +8,6 @@ export * from './hostname';
 export * from './method';
 export * from './never';
 export * from './not';
-export * from './or';
 export * from './pass';
 export * from './pathname';
 export * from './protocol';
