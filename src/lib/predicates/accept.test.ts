@@ -1,9 +1,10 @@
+import { createMockRequest } from '$test/mocks';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { accept } from './accept';
 
 describe('accept', () => {
 	beforeEach((context) => {
-		context.req = new Request('https://example.com', { headers: { accept: 'application/json' } });
+		context.req = createMockRequest('https://example.com', { headers: { accept: 'application/json' } });
 	});
 
 	it('is true if the accept header is empty', ({ ctx, env, req }) => {

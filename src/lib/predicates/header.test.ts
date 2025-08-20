@@ -1,9 +1,10 @@
+import { createMockRequest } from '$test/mocks';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { header } from './header';
 
 describe('header', () => {
 	beforeEach((context) => {
-		context.req = new Request('https://example.com', { headers: { 'x-custom-header': 'example' } });
+		context.req = createMockRequest('https://example.com', { headers: { 'x-custom-header': 'example' } });
 	});
 
 	it('is true if the header is present', ({ ctx, env, req }) => {
