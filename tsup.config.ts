@@ -6,5 +6,7 @@ export default defineConfig({
 	entry: ['./src/index.ts'],
 	format: ['esm'],
 	outDir: 'dist',
-	platform: 'node',
+	outExtension: () => ({ js: '.mjs' }),
+	platform: 'neutral',
+	external: ['async_hooks', 'node:async_hooks'],
 });
