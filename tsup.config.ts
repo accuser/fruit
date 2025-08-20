@@ -8,5 +8,4 @@ export default defineConfig({
 	outDir: 'dist',
 	outExtension: () => ({ js: '.mjs' }),
 	platform: 'neutral',
-	external: ['async_hooks', 'node:async_hooks'],
 });
