@@ -7,26 +7,49 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
-		"lib": ["ES2022", "WebWorker"],
+		"lib": [
+			"ES2022",
+			"WebWorker"
+		],
 		"module": "ESNext",
 		"moduleDetection": "force",
 		"moduleResolution": "bundler",
 		"outDir": "dist",
 		"paths": {
-			"$lib": ["./src/lib"],
-			"$lib/*": ["./src/lib/*"],
-			"$test": ["./test"],
-			"$test/*": ["./test/*"],
-			"$types": ["./src/types"],
-			"$types/*": ["./src/types/*"]
+			"$lib": [
+				"./src/lib"
+			],
+			"$lib/*": [
+				"./src/lib/*"
+			],
+			"$test": [
+				"./test"
+			],
+			"$test/*": [
+				"./test/*"
+			],
+			"$types": [
+				"./src/types"
+			],
+			"$types/*": [
+				"./src/types/*"
+			]
 		},
 		"rootDir": ".",
 		"skipLibCheck": true,
 		"sourceMap": false,
 		"strict": true,
 		"target": "es2022",
-		"types": ["./worker-configuration.d.ts", "node"]
+		"types": [
+			"./worker-configuration.d.ts",
+			"node"
+		]
 	},
-	"exclude": ["node_modules", "dist"],
-	"include": ["src/**/*.ts", "test/**/*.ts"]
+	"exclude": [
+		"node_modules"
+	],
+	"include": [
+		"src/**/*.ts",
+		"test/**/*.ts"
+	]
 }
