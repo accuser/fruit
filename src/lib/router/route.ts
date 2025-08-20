@@ -11,8 +11,14 @@ export const route = (...routes: Route<string | URLPatternInit>[]) =>
 					request,
 					url: new URL(request.url),
 				},
-				() =>
-					routes.find(([predicate]) => predicate(request, env, ctx))?.[1](getRequestEvent()) ||
-					new Response(null, { status: 404 })
+				async () => {
+					for (const [predicate, handler] of routes) {
+						const matches = await predicate(request, env, ctx);
+						if (matches) {
+							return handler(getRequestEvent());
+						}
+					}
+					return new Response(null, { status: 404 });
+				}
 			),
 	}) satisfies ExportedHandler<Env>;
