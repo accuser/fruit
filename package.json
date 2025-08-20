@@ -1,6 +1,6 @@
 {
-	"name": "@accuser/frouter",
-	"version": "1.0.0",
+	"name": "@accuser/fruit",
+	"version": "0.0.1",
 	"description": "Functional TypeScript router for Cloudflare Workers",
 	"type": "module",
 	"main": "./dist/index.mjs",
