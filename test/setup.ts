@@ -2,6 +2,6 @@ declare module 'vitest' {
 	interface TestContext {
 		ctx: ExecutionContext;
 		env: Env;
-		req: Request;
+		req: Request<unknown, IncomingRequestCfProperties<unknown>>;
 	}
 }
