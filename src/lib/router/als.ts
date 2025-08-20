@@ -1,7 +1,7 @@
 import type { RequestEvent } from '$types';
 import { AsyncLocalStorage } from 'node:async_hooks';
 
-export const als = new AsyncLocalStorage<RequestEvent<any>>();
+export const als = new AsyncLocalStorage<RequestEvent<string | URLPatternInit>>();
 
 export const getRequestEvent = () => {
 	const event = als.getStore();
