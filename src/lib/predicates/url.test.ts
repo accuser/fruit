@@ -1,13 +1,14 @@
 import { als } from '$lib/router/als';
+import { createMockRequest } from '$test/mocks';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { url } from './url';
 
 describe('url', () => {
 	beforeEach((context) => {
-		context.req = new Request('https://example.com/users/42');
+		context.req = createMockRequest('https://example.com/users/42');
 	});
 
-	it('is true if the url matches', ({ ctx, env, req }) => {
+	it('is true if the url matches', ({ req, env, ctx }) => {
 		const predicate = url('https://example.com');
 		let result;
 
