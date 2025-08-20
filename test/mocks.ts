@@ -1,4 +1,4 @@
-import type { RequestEvent } from '$types';
+import type { RequestEvent } from 'src';
 import { vi } from 'vitest';
 
 export const createMockHandler = (response = new Response('OK')) => vi.fn().mockResolvedValue(response);
