@@ -1,8 +1,16 @@
 import type { Route } from '$types';
 import { als, getRequestEvent } from './als';
 
-export const route = (...routes: Route<string | URLPatternInit>[]) =>
-	({
+function isRoute(
+	arg: Route<string | URLPatternInit> | Route<string | URLPatternInit>[]
+): arg is Route<string | URLPatternInit> {
+	return Array.isArray(arg) && typeof arg[0] === 'function';
+}
+
+export const route = ((arg, ...args) => {
+	const routes = isRoute(arg) ? [arg, ...args] : arg;
+
+	return {
 		fetch: async (request, env, ctx) =>
 			als.run(
 				{
@@ -21,4 +29,8 @@ export const route = (...routes: Route<string | URLPatternInit>[]) =>
 					return new Response(null, { status: 404 });
 				}
 			),
-	}) satisfies ExportedHandler<Env>;
+	} satisfies ExportedHandler<Env>;
+}) satisfies {
+	(routes: Route<string | URLPatternInit>[]): ExportedHandler<Env>;
+	(...routes: Route<string | URLPatternInit>[]): ExportedHandler<Env>;
+};
